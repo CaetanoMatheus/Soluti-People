@@ -28,13 +28,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   components: {
     Input: () => import('@/components/input/Input'),
     InputError: () => import('@/components/text/InputError'),
     Button: () => import('@/components/button/Button'),
+  },
+
+  props: {
+    errors: {
+      type: Object,
+      required: true,
+    },
   },
 
   data: () => ({
@@ -44,16 +49,12 @@ export default {
     },
   }),
 
-  computed: {
-    ...mapGetters({
-      errors: 'auth/getErrors',
-    }),
-  },
-
   methods: {
     async login() {
       await this.$store.dispatch('auth/login', this.form)
-      this.$router.push({ name: 'Home' })
+      if (Object.keys(this.errors).length === 0) {
+        this.$router.push({ name: 'Home' })
+      }
     },
   },
 

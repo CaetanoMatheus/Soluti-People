@@ -18,8 +18,8 @@
       />
 
       <div class="content__form">
-        <LoginForm v-if="loginRoute" />
-        <RegistrationForm v-else />
+        <LoginForm :errors="errors" v-if="loginRoute" />
+        <RegistrationForm :errors="errors" v-else />
 
         <span class="form__registerMessage">
           {{
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     Title: () => import('@/components/text/Title'),
@@ -46,6 +48,10 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      errors: 'auth/getErrors',
+    }),
+
     loginRoute() {
       return this.$route.name === 'Login'
     },

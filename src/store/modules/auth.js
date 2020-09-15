@@ -18,6 +18,7 @@ export default {
 
   actions: {
     async login({ commit }, credentials) {
+      commit('resetErrors')
       try {
         const { data } = await api.post('login', credentials)
         window.localStorage.setItem('token', data.token)
@@ -27,6 +28,7 @@ export default {
     },
 
     async register({ commit }, formData) {
+      commit('resetErrors')
       try {
         await api.post('register', formData)
       } catch (err) {
