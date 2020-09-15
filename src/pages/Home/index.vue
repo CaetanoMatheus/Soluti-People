@@ -2,6 +2,7 @@
   <div class="home">
     <Title title="Hello World!!" subText="It's time to code." />
     <UsersTable :users="users.data" v-if="users.data" />
+    <Pagination />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ export default {
   components: {
     Title: () => import('@/components/text/Title'),
     UsersTable: () => import('@/components/table/UsersTable'),
+    Pagination: () => import('@/components/pagination/Pagination'),
   },
 
   computed: {

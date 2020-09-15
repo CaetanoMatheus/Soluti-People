@@ -19,9 +19,9 @@ export default {
   },
 
   actions: {
-    async all({ commit }) {
+    async all({ commit }, page = 1) {
       commit('setIsLoading', true, { root: true })
-      const { data } = await api.get('users', headers)
+      const { data } = await api.get(`users?page=${page}`, headers)
       commit('setUsers', data)
       commit('setIsLoading', false, { root: true })
     },
