@@ -4,13 +4,14 @@
       <Unicon class="label__icon" :name="icon" fill="limegreen" v-if="icon" />
       {{ label }}
     </label>
-    <input class="input" v-bind="$attrs" />
+    <input class="input" v-bind="$attrs" :value="value" v-on="listeners" />
   </div>
 </template>
 
 <script>
 export default {
   inheritAttrs: false,
+
   props: {
     label: {
       type: String,
@@ -19,6 +20,19 @@ export default {
     icon: {
       type: String,
       required: false,
+    },
+    value: {
+      type: String,
+      required: false,
+    },
+  },
+
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: (event) => this.$emit('input', event.target.value),
+      }
     },
   },
 }
