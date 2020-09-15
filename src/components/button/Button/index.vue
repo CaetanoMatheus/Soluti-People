@@ -1,11 +1,13 @@
 <template>
   <div class="container">
-    <button class="button">{{ text }}</button>
+    <button v-bind="$attrs" class="button">{{ text }}</button>
   </div>
 </template>
 
 <script>
 export default {
+  inheritAttrs: false,
+
   props: {
     text: {
       type: String,

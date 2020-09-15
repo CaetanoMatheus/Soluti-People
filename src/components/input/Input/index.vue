@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <label class="label">
-      <Unicon class="label__icon" :name="icon" fill="limegreen" v-if="icon" />
+      <Unicon class="label__icon" :name="icon"  fill="limegreen" v-if="icon" />
       {{ label }}
     </label>
     <input class="input" v-bind="$attrs" :value="value" v-on="listeners" />
