@@ -19,8 +19,11 @@
       icon="files-landscapes-alt"
       placeholder="Insira o seu CPF"
       v-model="form.cpf"
+      :mask="['###.###.###-##']"
     />
     <InputError :message="errors.cpf[0]" v-if="errors.cpf" />
+
+    {{ form.cpf }}
 
     <Input
       class="form__input"

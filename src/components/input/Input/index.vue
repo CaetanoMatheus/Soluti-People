@@ -1,16 +1,22 @@
 <template>
-  <div class="container">
-    <label class="label">
-      <Unicon class="label__icon" :name="icon"  fill="limegreen" v-if="icon" />
-      {{ label }}
-    </label>
+  <InputWrapper :label="label" :icon="icon">
     <input class="input" v-bind="$attrs" :value="value" v-on="listeners" />
-  </div>
+  </InputWrapper>
 </template>
 
 <script>
+// import { TheMask } from 'vue-the-mask'
+
 export default {
   inheritAttrs: false,
+
+  components: {
+    InputWrapper: () => import('@/components/wrapper/InputWrapper'),
+  },
+
+  // components: {
+  //   TheMask,
+  // },
 
   props: {
     label: {
@@ -37,35 +43,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.container {
-  width: 100%;
-}
-
-.label {
-  display: flex;
-  align-items: center;
-
-  &__icon {
-    display: flex;
-    align-items: center;
-    margin: 0 5px 0 2px;
-  }
-}
-
-.input {
-  width: 100%;
-  height: 45px;
-  padding: 0 10px;
-  outline: none;
-  border: 1px solid $light-grey;
-  border-radius: 5px;
-  background: lighten($light-grey, 10);
-  transition: background .5s;
-
-  &:focus {
-    background: $white;
-  }
-}
-</style>

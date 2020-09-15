@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuelidate from 'vuelidate'
+import VueTheMask from 'vue-the-mask'
 
 import App from '@/App'
 import router from '@/router'
@@ -8,7 +8,7 @@ import '@/utils/unicons'
 
 import '@/styles/global.scss'
 
-Vue.use(Vuelidate)
+Vue.use(VueTheMask)
 
 Vue.config.productionTip = false
 
