@@ -19,6 +19,7 @@ export default {
   mutations: {
     setUsers: (state, data) => { state.users = data },
     setUser: (state, data) => { state.user = data },
+    setUserTelephones: (state, data) => { state.user.telephones = data },
   },
 
   actions: {
@@ -34,6 +35,13 @@ export default {
       const { data } = await api.get(`users/${id}`, headers)
       commit('setUser', data)
       commit('setIsLoading', false, { root: true })
+    },
+
+    removeTelephone({ state, commit }, id) {
+      const newArray = JSON.parse(JSON.stringify(state.user.telephones))
+      const index = newArray.map((telephone) => telephone.id).indexOf(id)
+      newArray.splice(index, 1)
+      commit('setUserTelephones', newArray)
     },
   },
 }

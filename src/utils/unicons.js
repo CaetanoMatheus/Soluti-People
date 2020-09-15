@@ -9,6 +9,9 @@ import {
   uniCalendarAlt,
   uniAngleRight,
   uniAngleLeft,
+  uniPhone,
+  uniHome,
+  uniTrash,
 } from 'vue-unicons/src/icons'
 
 Unicon.add([
@@ -20,6 +23,9 @@ Unicon.add([
   uniCalendarAlt,
   uniAngleRight,
   uniAngleLeft,
+  uniPhone,
+  uniHome,
+  uniTrash,
 ])
 
 Vue.use(Unicon, { height: 20, width: 20 })

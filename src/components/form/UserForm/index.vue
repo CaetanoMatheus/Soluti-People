@@ -1,6 +1,9 @@
 <template>
   <div class="userForm">
     <form class="form">
+      <!-- <br>
+      <h3>Dados Pessoais</h3>
+
       <Input
         class="form__input"
         label="Nome"
@@ -51,7 +54,80 @@
         type="password"
         placeholder="Insira a sua senha"
         v-model="user.password_confirmation"
+      /> -->
+
+      <br>
+      <h3>Telefones</h3>
+
+      <InputWrapper
+        class="form__input form__telephoneItem"
+        icon="phone"
+        :label="`Telephone ${index + 1}`"
+        :key="index"
+        v-for="(telephone, index) in user.telephones"
+      >
+        <TheMask
+          class="input"
+          placeholder="Insira um telefon"
+          v-model="telephone.number"
+          :mask="['(##) ####-####', '(##) #####-####']"
+        />
+        <button class="form__telephoneButton" type="button" @click="removeTelephone(telephone.id)">
+          <Unicon class="label__icon" name="trash" fill="white"/>
+        </button>
+      </InputWrapper>
+
+      <br>
+      <!-- <h3>Dados do Endereço</h3>
+
+      <Input
+        class="form__input"
+        label="Rua"
+        icon="home"
+        placeholder="Insira a rua"
+        v-model="user.address.street"
       />
+
+      <Input
+        class="form__input"
+        label="Número"
+        icon="home"
+        placeholder="Insira o número"
+        v-model="user.address.number"
+      />
+
+      <Input
+        class="form__input"
+        label="Complemento"
+        icon="home"
+        placeholder="Insira o complemento"
+        v-model="user.address.component"
+      />
+
+      <Input
+        class="form__input"
+        label="Bairro"
+        icon="home"
+        placeholder="Insira o bairro"
+        v-model="user.address.neighborhood"
+      />
+
+      <Input
+        class="form__input"
+        label="Cidade"
+        icon="home"
+        placeholder="Insira a cidade"
+        v-model="user.address.city"
+      />
+
+      <Input
+        class="form__input"
+        label="State"
+        icon="home"
+        placeholder="Insira o estado"
+        v-model="user.address.state"
+      /> -->
+
       <DoubleBounce class="form__button" v-if="isLoading" />
       <Button class="form__button" text="Cadastrar-se" v-else />
     </form>
@@ -67,7 +143,7 @@ export default {
   components: {
     TheMask,
     DoubleBounce,
-    Input: () => import('@/components/input/Input'),
+    // Input: () => import('@/components/input/Input'),
     InputWrapper: () => import('@/components/wrapper/InputWrapper'),
     Button: () => import('@/components/button/Button'),
   },
@@ -89,6 +165,12 @@ export default {
       isLoading: 'getIsLoading',
     }),
   },
+
+  methods: {
+    removeTelephone(id) {
+      this.$store.dispatch('user/removeTelephone', id)
+    },
+  },
 }
 </script>
 
@@ -103,6 +185,28 @@ export default {
 .form {
   &__input, &__button {
     margin-top: 15px;
+  }
+
+  &__telephoneItem {
+    position: relative;
+  }
+
+  &__telephoneButton {
+    cursor: pointer;
+    position: absolute;
+    top: 27px;
+    right: 3px;
+    height: 41px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: lighten($red, 20);
+    transition: background .5s;
+
+    &:hover {
+      background: darken($red, 10);
+    }
   }
 }
 </style>
