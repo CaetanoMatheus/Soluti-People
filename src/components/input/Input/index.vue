@@ -5,18 +5,12 @@
 </template>
 
 <script>
-// import { TheMask } from 'vue-the-mask'
-
 export default {
   inheritAttrs: false,
 
   components: {
     InputWrapper: () => import('@/components/wrapper/InputWrapper'),
   },
-
-  // components: {
-  //   TheMask,
-  // },
 
   props: {
     label: {

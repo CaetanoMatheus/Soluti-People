@@ -23,13 +23,18 @@
     />
     <InputError :message="errors.password[0]" v-if="errors.password" />
 
-    <Button class="form__button" text="Acessar" />
+    <DoubleBounce class="form__button" v-if="isLoading" />
+    <Button class="form__button" text="Acessar" v-else />
   </form>
 </template>
 
 <script>
+import { DoubleBounce } from 'vue-loading-spinner'
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
+    DoubleBounce,
     Input: () => import('@/components/input/Input'),
     InputError: () => import('@/components/text/InputError'),
     Button: () => import('@/components/button/Button'),
@@ -48,6 +53,12 @@ export default {
       password: '',
     },
   }),
+
+  computed: {
+    ...mapGetters({
+      isLoading: 'getIsLoading',
+    }),
+  },
 
   methods: {
     async login() {

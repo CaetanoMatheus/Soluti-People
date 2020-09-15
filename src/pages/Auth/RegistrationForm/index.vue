@@ -67,17 +67,20 @@
       :message="errors.password_confirmation[0]"
       v-if="errors.password_confirmation"
     />
-
-    <Button class="form__button" text="Acessar" />
+    <DoubleBounce class="form__button" v-if="isLoading" />
+    <Button class="form__button" text="Cadastrar-se" v-else />
   </form>
 </template>
 
 <script>
 import { TheMask } from 'vue-the-mask'
+import { DoubleBounce } from 'vue-loading-spinner'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     TheMask,
+    DoubleBounce,
     Input: () => import('@/components/input/Input'),
     InputWrapper: () => import('@/components/wrapper/InputWrapper'),
     InputError: () => import('@/components/text/InputError'),
@@ -101,6 +104,12 @@ export default {
       password_confirmation: '',
     },
   }),
+
+  computed: {
+    ...mapGetters({
+      isLoading: 'getIsLoading',
+    }),
+  },
 
   methods: {
     async register() {
