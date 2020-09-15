@@ -13,17 +13,15 @@
     />
     <InputError :message="errors.name[0]" v-if="errors.name" />
 
-    <Input
-      class="form__input"
-      label="CPF"
-      icon="files-landscapes-alt"
-      placeholder="Insira o seu CPF"
-      v-model="form.cpf"
-      :mask="['###.###.###-##']"
-    />
+    <InputWrapper class="form__input" label="CPF" icon="files-landscapes-alt">
+      <TheMask
+        class="input"
+        placeholder="Insira o seu CPF"
+        :mask="['###.###.###-##']"
+        v-model="form.cpf"
+      />
+    </InputWrapper>
     <InputError :message="errors.cpf[0]" v-if="errors.cpf" />
-
-    {{ form.cpf }}
 
     <Input
       class="form__input"
@@ -33,7 +31,10 @@
       placeholder="Insira a sua dsata de nascimento"
       v-model="form.date_of_birth"
     />
-    <InputError :message="errors.date_of_birth[0]" v-if="errors.date_of_birth" />
+    <InputError
+      :message="errors.date_of_birth[0]"
+      v-if="errors.date_of_birth"
+    />
 
     <Input
       class="form__input"
@@ -72,9 +73,13 @@
 </template>
 
 <script>
+import { TheMask } from 'vue-the-mask'
+
 export default {
   components: {
+    TheMask,
     Input: () => import('@/components/input/Input'),
+    InputWrapper: () => import('@/components/wrapper/InputWrapper'),
     InputError: () => import('@/components/text/InputError'),
     Button: () => import('@/components/button/Button'),
   },
@@ -89,6 +94,8 @@ export default {
   data: () => ({
     form: {
       name: '',
+      cpf: '',
+      date_of_birth: '',
       email: '',
       password: '',
       password_confirmation: '',
@@ -99,7 +106,10 @@ export default {
     async register() {
       await this.$store.dispatch('auth/register', this.form)
       if (Object.keys(this.errors).length === 0) {
-        this.$router.push({ name: 'Login', params: { email: this.form.email } })
+        this.$router.push({
+          name: 'Login',
+          params: { email: this.form.email },
+        })
       }
     },
   },
