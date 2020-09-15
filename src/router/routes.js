@@ -3,6 +3,7 @@ export default [
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "home-page" */ '@/pages/Home'),
+    meta: { requiresAuth: true },
   },
   {
     path: '/login',

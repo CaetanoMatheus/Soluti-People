@@ -1,43 +1,33 @@
 <template>
   <form class="form" @submit.prevent="login">
-    <div class="form__input">
-      <Input
-        label="E-mail"
-        icon="envelope"
-        placeholder="Insira o seu e-mail"
-        v-model="form.email"
-      />
-      <div v-if="$v.form.email.$error">
-        <InputError
-          message="Por favor, informe o e-mail."
-          v-if="!$v.form.email.required"
-        />
-        <InputError
-          message="O e-mail precisa ser um endereço válido."
-          v-if="!$v.form.email.email"
-        />
-      </div>
-    </div>
+    <h4 class="form__message">
+      <InputError :message="errors.message" v-if="errors.message" />
+    </h4>
 
-    <div class="form__input">
-      <Input
-        label="Senha"
-        icon="lock"
-        placeholder="Insira a sua senha"
-        v-model="form.password"
-      />
-      <InputError
-        message="Por favor, informe a senha."
-        v-if="$v.form.password.$error && !$v.form.password.required"
-      />
-    </div>
+    <Input
+      class="form__input"
+      label="E-mail"
+      icon="envelope"
+      placeholder="Insira o seu e-mail"
+      v-model="form.email"
+    />
+    <InputError :message="errors.email[0]" v-if="errors.email" />
+
+    <Input
+      class="form__input"
+      label="Senha"
+      icon="lock"
+      placeholder="Insira a sua senha"
+      v-model="form.password"
+    />
+    <InputError :message="errors.password[0]" v-if="errors.password" />
 
     <Button class="form__button" text="Acessar" />
   </form>
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -53,18 +43,17 @@ export default {
     },
   }),
 
-  validations: {
-    form: {
-      email: { required, email },
-      password: { required },
-    },
+  computed: {
+    ...mapGetters({
+      errors: 'auth/getErrors',
+    }),
   },
 
   methods: {
-    login() {
-      if (this.$v.form.$invalid) this.$v.$touch()
-      else {
-        alert('Alert')
+    async login() {
+      await this.$store.dispatch('auth/login', this.form)
+      if (window.localStorage.getItem('token')) {
+        this.$router.push({ name: 'Home' })
       }
     },
   },

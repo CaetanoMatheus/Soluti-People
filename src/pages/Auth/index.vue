@@ -93,8 +93,12 @@ export default {
 }
 
 .form {
-  &__input {
+  &__message {
     margin-bottom: 15px;
+  }
+
+  &__input {
+    margin-top: 15px;
   }
 
   &__button {
