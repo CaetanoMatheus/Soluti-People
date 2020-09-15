@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  app:
+    container_name: ${VUE_APP_PROJECT_NAME}
+    build: .
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - ${VUE_APP_DOCKER_PORT}:8080
