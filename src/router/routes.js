@@ -7,11 +7,11 @@ export default [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login-page" */ '@/pages/Login'),
+    component: () => import(/* webpackChunkName: "login-page" */ '@/pages/Auth'),
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import(/* webpackChunkName: "register-page" */ '@/pages/Register'),
+    component: () => import(/* webpackChunkName: "register-page" */ '@/pages/Auth'),
   },
 ]
