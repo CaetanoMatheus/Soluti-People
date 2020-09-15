@@ -35,7 +35,7 @@ export default {
   }
 
   &__subtextText {
-    color: $light-grey;
+    color: lighten($light-grey, 10);
     margin: 0 5px 6px 0;
   }
 }
