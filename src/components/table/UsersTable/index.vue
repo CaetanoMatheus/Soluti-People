@@ -8,7 +8,12 @@
         <th class="table__fieldItem">Nascimento</th>
         <th class="table__fieldItem">E-mail</th>
       </tr>
-      <tr class="table__item" v-for="user in users" :key="user.id">
+      <tr
+        class="table__item"
+        v-for="user in users"
+        :key="user.id"
+        @click="goToEditPage(user.id)"
+      >
         <td class="table__infoItem">{{ user.id }}</td>
         <td class="table__infoItem">{{ user.name }}</td>
         <td class="table__infoItem">{{ user.cpf | formatCPF }}</td>
@@ -27,6 +32,12 @@ export default {
       required: true,
     },
   },
+
+  methods: {
+    goToEditPage(id) {
+      this.$router.push({ name: 'Edit', params: { id } })
+    },
+  },
 }
 </script>
 
@@ -37,7 +48,6 @@ export default {
   background: $white;
   box-shadow: 1px 1px 5px $default-text;
   overflow: auto;
-
 }
 
 .table {
@@ -45,7 +55,8 @@ export default {
   text-align: left;
   white-space: nowrap;
 
-  &__infoItem, &__fieldItem {
+  &__infoItem,
+  &__fieldItem {
     color: $default-text;
     padding: 5px 10px;
   }
@@ -53,7 +64,7 @@ export default {
   &__item {
     cursor: pointer;
     background: lighten($light-grey, 15);
-    transition: background .3s;
+    transition: background 0.3s;
 
     &:hover {
       background: lighten($green, 20);
