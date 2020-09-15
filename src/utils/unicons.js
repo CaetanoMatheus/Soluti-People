@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Unicon from 'vue-unicons'
-import { uniArrow } from 'vue-unicons/src/icons'
+import { uniArrow, uniUser, uniLock } from 'vue-unicons/src/icons'
 
-Unicon.add([uniArrow])
+Unicon.add([uniArrow, uniUser, uniLock])
 
-Vue.use(Unicon)
+Vue.use(Unicon, { height: 20, width: 20 })

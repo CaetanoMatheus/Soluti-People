@@ -1,5 +1,5 @@
 <template>
-  <div class="helloWold">
+  <div class="container">
     <Title title="Hello World!!" subText="It's time to code." />
   </div>
 </template>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.helloWold {
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
