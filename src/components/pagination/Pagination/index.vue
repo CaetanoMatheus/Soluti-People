@@ -61,7 +61,9 @@ export default {
 
 .current {
   padding: 5px;
-  background: lighten($green, 40);
+  font-weight: bold;
+  color: $white;
+  background: lighten($green, 10);
 }
 
 .item {

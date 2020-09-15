@@ -3,7 +3,6 @@
     <h1 class="title__mainTitle">{{ title }}</h1>
     <div class="title__subtext">
       <h5 class="title__subtextText">{{ subText }}</h5>
-      <Unicon name="arrow" fill="limegreen" />
     </div>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <Title title="Hello World!!" subText="It's time to code." />
-    <UsersTable :users="users.data" v-if="users.data" />
-    <Pagination />
+    <Title title="Lista de Usuários" />
+    <UsersTable class="table" :users="users.data" v-if="users.data" />
+    <Pagination class="pagination" />
   </div>
 </template>
 
@@ -36,5 +36,13 @@ export default {
   height: 100vh;
   padding: 30px;
   background: $green;
+}
+
+.table {
+  margin: 20px 0;
+}
+
+.pagination {
+  align-self: flex-start;
 }
 </style>
