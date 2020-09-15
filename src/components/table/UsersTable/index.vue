@@ -8,11 +8,11 @@
         <th class="table__fieldItem">Nascimento</th>
         <th class="table__fieldItem">E-mail</th>
       </tr>
-      <tr v-for="user in users" :key="user.id">
+      <tr class="table__item" v-for="user in users" :key="user.id">
         <td class="table__infoItem">{{ user.id }}</td>
         <td class="table__infoItem">{{ user.name }}</td>
-        <td class="table__infoItem">{{ user.cpf }}</td>
-        <td class="table__infoItem">{{ user.date_of_birth }}</td>
+        <td class="table__infoItem">{{ user.cpf | formatCPF }}</td>
+        <td class="table__infoItem">{{ user.date_of_birth | formatDate }}</td>
         <td class="table__infoItem">{{ user.email }}</td>
       </tr>
     </table>
@@ -46,12 +46,18 @@ export default {
   white-space: nowrap;
 
   &__infoItem, &__fieldItem {
-    padding: 5px 10px;
     color: $default-text;
+    padding: 5px 10px;
   }
 
-  &__infoItem {
-      background: lighten($light-grey, 15);
+  &__item {
+    cursor: pointer;
+    background: lighten($light-grey, 15);
+    transition: background .3s;
+
+    &:hover {
+      background: lighten($green, 20);
+    }
   }
 }
 </style>

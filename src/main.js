@@ -8,6 +8,8 @@ import '@/utils/unicons'
 
 import '@/styles/global.scss'
 
+require('@/utils/filters')
+
 Vue.use(VueTheMask)
 
 Vue.config.productionTip = false
