@@ -26,5 +26,13 @@ export default {
       }
     },
 
+    async register({ commit }, formData) {
+      try {
+        await api.post('register', formData)
+      } catch (err) {
+        commit('setErrors', err.response.data)
+      }
+    },
+
   },
 }

@@ -17,6 +17,7 @@
       class="form__input"
       label="Senha"
       icon="lock"
+      type="password"
       placeholder="Insira a sua senha"
       v-model="form.password"
     />
@@ -52,10 +53,15 @@ export default {
   methods: {
     async login() {
       await this.$store.dispatch('auth/login', this.form)
-      if (window.localStorage.getItem('token')) {
-        this.$router.push({ name: 'Home' })
-      }
+      this.$router.push({ name: 'Home' })
     },
+  },
+
+  created() {
+    if (this.$route.params.email) {
+      this.form.email = this.$route.params.email
+    }
+    this.$store.commit('auth/resetErrors')
   },
 }
 </script>
