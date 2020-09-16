@@ -27,6 +27,7 @@ export default {
     setUsers: (state, data) => { state.users = data },
     setUser: (state, data) => { state.user = data },
     setUserTelephones: (state, data) => { state.user.telephones = data },
+    setUserAddress: (state, data) => { state.user.address = data },
   },
 
   actions: {
@@ -47,6 +48,18 @@ export default {
         commit('setUser', data)
       } catch (err) {
         verifyAuthentication(err.response.status)
+      }
+      commit('setIsLoading', false, { root: true })
+    },
+
+    async update({ commit }, user) {
+      commit('resetErrors', null, { root: true })
+      try {
+        commit('setIsLoading', true, { root: true })
+        const { data } = await api.put(`users/${user.id}`, user, headers)
+        commit('setUser', data)
+      } catch (err) {
+        commit('setErrors', err.response.data, { root: true })
       }
       commit('setIsLoading', false, { root: true })
     },

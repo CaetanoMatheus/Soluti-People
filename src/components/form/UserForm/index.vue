@@ -1,5 +1,5 @@
 <template>
-  <div class="userForm">
+  <div class="userForm" @submit.prevent="updateUser">
     <form class="form">
       <br />
       <FormTitle title="Dados Pessoais" />
@@ -59,7 +59,7 @@
       <br />
       <FormTitle title="Telefone">
         <button
-          class="form__newTelephoneButton"
+          class="form__newData"
           type="button"
           @click="addTelephone"
         >
@@ -90,10 +90,20 @@
         </button>
       </InputWrapper>
 
-      <div v-if="user.address">
-        <br />
-        <FormTitle title="Dados do Endereço" />
+      <br />
+      <FormTitle title="Dados do Endereço">
+        <button
+          class="form__newData"
+          type="button"
+          v-if="!user.address"
+          @click="addAddress"
+        >
+          <Unicon class="label__icon" name="plus" fill="limegreen" />
+          Novo Endereço
+        </button>
+      </FormTitle>
 
+      <div v-if="user.address">
         <Input
           class="form__input"
           label="Rua"
@@ -164,17 +174,6 @@ export default {
     Button: () => import('@/components/button/Button'),
   },
 
-  data: () => ({
-    form: {
-      name: '',
-      cpf: '',
-      date_of_birth: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
-    },
-  }),
-
   computed: {
     ...mapGetters({
       user: 'user/getUser',
@@ -189,6 +188,21 @@ export default {
 
     addTelephone() {
       this.$store.dispatch('user/addTelephone', { number: '' })
+    },
+
+    addAddress() {
+      this.$store.commit('user/setUserAddress', {
+        street: '',
+        number: '',
+        complement: '',
+        neighborhood: '',
+        city: '',
+        state: '',
+      })
+    },
+
+    updateUser() {
+      this.$store.dispatch('user/update', this.user)
     },
   },
 }
@@ -213,7 +227,7 @@ export default {
   }
 
   &__telephoneButton,
-  &__newTelephoneButton {
+  &__newData{
     cursor: pointer;
     outline: none;
     border: none;
@@ -234,7 +248,7 @@ export default {
     }
   }
 
-  &__newTelephoneButton {
+  &__newData{
     display: flex;
     align-items: center;
     background: transparent;

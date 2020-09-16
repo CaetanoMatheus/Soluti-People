@@ -73,7 +73,7 @@ export default {
     if (this.$route.params.email) {
       this.form.email = this.$route.params.email
     }
-    this.$store.commit('auth/resetErrors')
+    this.$store.commit('resetErrors')
   },
 }
 </script>

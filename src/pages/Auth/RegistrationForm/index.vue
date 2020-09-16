@@ -124,7 +124,7 @@ export default {
   },
 
   created() {
-    this.$store.commit('auth/resetErrors')
+    this.$store.commit('resetErrors')
   },
 }
 </script>

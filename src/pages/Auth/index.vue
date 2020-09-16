@@ -49,7 +49,7 @@ export default {
 
   computed: {
     ...mapGetters({
-      errors: 'auth/getErrors',
+      errors: 'getErrors',
     }),
 
     loginRoute() {
