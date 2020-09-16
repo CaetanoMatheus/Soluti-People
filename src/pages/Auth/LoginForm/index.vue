@@ -64,7 +64,7 @@ export default {
     async login() {
       await this.$store.dispatch('auth/login', this.form)
       if (Object.keys(this.errors).length === 0) {
-        this.$router.push({ name: 'Home' })
+        window.location.reload()
       }
     },
   },

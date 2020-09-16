@@ -12,6 +12,7 @@ import {
   uniPhone,
   uniHome,
   uniTrash,
+  uniPlus,
 } from 'vue-unicons/src/icons'
 
 Unicon.add([
@@ -26,6 +27,7 @@ Unicon.add([
   uniPhone,
   uniHome,
   uniTrash,
+  uniPlus,
 ])
 
 Vue.use(Unicon, { height: 20, width: 20 })

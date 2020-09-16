@@ -1,8 +1,8 @@
 <template>
   <div class="userForm">
     <form class="form">
-      <!-- <br>
-      <h3>Dados Pessoais</h3>
+      <br />
+      <FormTitle title="Dados Pessoais" />
 
       <Input
         class="form__input"
@@ -54,10 +54,19 @@
         type="password"
         placeholder="Insira a sua senha"
         v-model="user.password_confirmation"
-      /> -->
+      />
 
-      <br>
-      <h3>Telefones</h3>
+      <br />
+      <FormTitle title="Telefone">
+        <button
+          class="form__newTelephoneButton"
+          type="button"
+          @click="addTelephone"
+        >
+          <Unicon class="label__icon" name="plus" fill="limegreen" />
+          Novo Telefone
+        </button>
+      </FormTitle>
 
       <InputWrapper
         class="form__input form__telephoneItem"
@@ -68,68 +77,74 @@
       >
         <TheMask
           class="input"
-          placeholder="Insira um telefon"
+          placeholder="Insira um telefone"
           v-model="telephone.number"
           :mask="['(##) ####-####', '(##) #####-####']"
         />
-        <button class="form__telephoneButton" type="button" @click="removeTelephone(telephone.id)">
-          <Unicon class="label__icon" name="trash" fill="white"/>
+        <button
+          class="form__telephoneButton"
+          type="button"
+          @click="removeTelephone(telephone.id)"
+        >
+          <Unicon class="label__icon" name="trash" fill="white" />
         </button>
       </InputWrapper>
 
-      <br>
-      <!-- <h3>Dados do Endereço</h3>
+      <div v-if="user.address">
+        <br />
+        <FormTitle title="Dados do Endereço" />
 
-      <Input
-        class="form__input"
-        label="Rua"
-        icon="home"
-        placeholder="Insira a rua"
-        v-model="user.address.street"
-      />
+        <Input
+          class="form__input"
+          label="Rua"
+          icon="home"
+          placeholder="Insira a rua"
+          v-model="user.address.street"
+        />
 
-      <Input
-        class="form__input"
-        label="Número"
-        icon="home"
-        placeholder="Insira o número"
-        v-model="user.address.number"
-      />
+        <Input
+          class="form__input"
+          label="Número"
+          icon="home"
+          placeholder="Insira o número"
+          v-model="user.address.number"
+        />
 
-      <Input
-        class="form__input"
-        label="Complemento"
-        icon="home"
-        placeholder="Insira o complemento"
-        v-model="user.address.component"
-      />
+        <Input
+          class="form__input"
+          label="Complemento"
+          icon="home"
+          placeholder="Insira o complemento"
+          v-model="user.address.component"
+        />
 
-      <Input
-        class="form__input"
-        label="Bairro"
-        icon="home"
-        placeholder="Insira o bairro"
-        v-model="user.address.neighborhood"
-      />
+        <Input
+          class="form__input"
+          label="Bairro"
+          icon="home"
+          placeholder="Insira o bairro"
+          v-model="user.address.neighborhood"
+        />
 
-      <Input
-        class="form__input"
-        label="Cidade"
-        icon="home"
-        placeholder="Insira a cidade"
-        v-model="user.address.city"
-      />
+        <Input
+          class="form__input"
+          label="Cidade"
+          icon="home"
+          placeholder="Insira a cidade"
+          v-model="user.address.city"
+        />
 
-      <Input
-        class="form__input"
-        label="State"
-        icon="home"
-        placeholder="Insira o estado"
-        v-model="user.address.state"
-      /> -->
+        <Input
+          class="form__input"
+          label="State"
+          icon="home"
+          placeholder="Insira o estado"
+          v-model="user.address.state"
+        />
+      </div>
 
       <DoubleBounce class="form__button" v-if="isLoading" />
-      <Button class="form__button" text="Cadastrar-se" v-else />
+      <Button class="form__button" text="Salvar dados" v-else />
     </form>
   </div>
 </template>
@@ -143,8 +158,9 @@ export default {
   components: {
     TheMask,
     DoubleBounce,
-    // Input: () => import('@/components/input/Input'),
+    Input: () => import('@/components/input/Input'),
     InputWrapper: () => import('@/components/wrapper/InputWrapper'),
+    FormTitle: () => import('@/components/text/FormTitle'),
     Button: () => import('@/components/button/Button'),
   },
 
@@ -170,6 +186,10 @@ export default {
     removeTelephone(id) {
       this.$store.dispatch('user/removeTelephone', id)
     },
+
+    addTelephone() {
+      this.$store.dispatch('user/addTelephone', { number: '' })
+    },
   },
 }
 </script>
@@ -183,29 +203,45 @@ export default {
 }
 
 .form {
-  &__input, &__button {
-    margin-top: 15px;
+  &__input,
+  &__button {
+    margin-top: 20px;
   }
 
   &__telephoneItem {
     position: relative;
   }
 
-  &__telephoneButton {
+  &__telephoneButton,
+  &__newTelephoneButton {
     cursor: pointer;
+    outline: none;
+    border: none;
+    transition: 0.5s;
+  }
+
+  &__telephoneButton {
     position: absolute;
     top: 27px;
     right: 3px;
     height: 41px;
     padding: 5px;
-    outline: none;
-    border: none;
     border-radius: 5px;
     background: lighten($red, 20);
-    transition: background .5s;
 
     &:hover {
       background: darken($red, 10);
+    }
+  }
+
+  &__newTelephoneButton {
+    display: flex;
+    align-items: center;
+    background: transparent;
+
+    &:hover {
+      font-size: 14px;
+      text-decoration: underline;
     }
   }
 }

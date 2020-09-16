@@ -3,6 +3,13 @@ import api from '@/services/api'
 const token = window.localStorage.getItem('token')
 const headers = { headers: { Authorization: `Bearer ${token}` } }
 
+function verifyAuthentication(status) {
+  if (status === 401) {
+    window.localStorage.removeItem('token')
+    document.location.reload()
+  }
+}
+
 export default {
   namespaced: true,
 
@@ -24,16 +31,23 @@ export default {
 
   actions: {
     async all({ commit }, page = 1) {
-      commit('setIsLoading', true, { root: true })
-      const { data } = await api.get(`users?page=${page}`, headers)
-      commit('setUsers', data)
+      try {
+        const { data } = await api.get(`users?page=${page}`, headers)
+        commit('setUsers', data)
+      } catch (err) {
+        verifyAuthentication(err.response.status)
+      }
       commit('setIsLoading', false, { root: true })
     },
 
     async one({ commit }, id) {
-      commit('setIsLoading', true, { root: true })
-      const { data } = await api.get(`users/${id}`, headers)
-      commit('setUser', data)
+      try {
+        commit('setIsLoading', true, { root: true })
+        const { data } = await api.get(`users/${id}`, headers)
+        commit('setUser', data)
+      } catch (err) {
+        verifyAuthentication(err.response.status)
+      }
       commit('setIsLoading', false, { root: true })
     },
 
@@ -41,6 +55,12 @@ export default {
       const newArray = JSON.parse(JSON.stringify(state.user.telephones))
       const index = newArray.map((telephone) => telephone.id).indexOf(id)
       newArray.splice(index, 1)
+      commit('setUserTelephones', newArray)
+    },
+
+    addTelephone({ state, commit }, telephone) {
+      const newArray = JSON.parse(JSON.stringify(state.user.telephones))
+      newArray.push(telephone)
       commit('setUserTelephones', newArray)
     },
   },
