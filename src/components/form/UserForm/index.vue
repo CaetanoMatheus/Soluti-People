@@ -1,5 +1,9 @@
 <template>
   <div class="userForm" @submit.prevent="updateUser">
+    <h4 class="form__message">
+      <InputError :message="errors.message" v-if="errors.message" />
+    </h4>
+
     <form class="form">
       <br />
       <FormTitle title="Dados Pessoais" />
@@ -11,6 +15,7 @@
         placeholder="Insira o seu nome"
         v-model="user.name"
       />
+      <InputError :message="errors.name[0]" v-if="errors.name" />
 
       <InputWrapper class="form__input" label="CPF" icon="files-landscapes-alt">
         <TheMask
@@ -20,6 +25,7 @@
           v-model="user.cpf"
         />
       </InputWrapper>
+      <InputError :message="errors.cpf[0]" v-if="errors.cpf" />
 
       <Input
         class="form__input"
@@ -29,6 +35,10 @@
         placeholder="Insira a sua dsata de nascimento"
         v-model="user.date_of_birth"
       />
+      <InputError
+        :message="errors.date_of_birth[0]"
+        v-if="errors.date_of_birth"
+      />
 
       <Input
         class="form__input"
@@ -37,6 +47,7 @@
         placeholder="Insira o seu e-mail"
         v-model="user.email"
       />
+      <InputError :message="errors.email[0]" v-if="errors.email" />
 
       <Input
         class="form__input"
@@ -46,6 +57,7 @@
         placeholder="Insira a sua senha"
         v-model="user.password"
       />
+      <InputError :message="errors.password[0]" v-if="errors.password" />
 
       <Input
         class="form__input"
@@ -58,11 +70,7 @@
 
       <br />
       <FormTitle title="Telefone">
-        <button
-          class="form__newData"
-          type="button"
-          @click="addTelephone"
-        >
+        <button class="form__newData" type="button" @click="addTelephone">
           <Unicon class="label__icon" name="plus" fill="limegreen" />
           Novo Telefone
         </button>
@@ -170,6 +178,7 @@ export default {
     DoubleBounce,
     Input: () => import('@/components/input/Input'),
     InputWrapper: () => import('@/components/wrapper/InputWrapper'),
+    InputError: () => import('@/components/text/InputError'),
     FormTitle: () => import('@/components/text/FormTitle'),
     Button: () => import('@/components/button/Button'),
   },
@@ -177,6 +186,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user/getUser',
+      errors: 'getErrors',
       isLoading: 'getIsLoading',
     }),
   },
@@ -227,7 +237,7 @@ export default {
   }
 
   &__telephoneButton,
-  &__newData{
+  &__newData {
     cursor: pointer;
     outline: none;
     border: none;
@@ -248,7 +258,7 @@ export default {
     }
   }
 
-  &__newData{
+  &__newData {
     display: flex;
     align-items: center;
     background: transparent;

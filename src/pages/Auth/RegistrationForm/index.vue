@@ -63,10 +63,7 @@
       placeholder="Insira a sua senha"
       v-model="form.password_confirmation"
     />
-    <InputError
-      :message="errors.password_confirmation[0]"
-      v-if="errors.password_confirmation"
-    />
+
     <DoubleBounce class="form__button" v-if="isLoading" />
     <Button class="form__button" text="Cadastrar-se" v-else />
   </form>
