@@ -38,6 +38,18 @@ export default {
       commit('setIsLoading', false, { root: true })
     },
 
+    async logout({ commit }) {
+      try {
+        commit('setIsLoading', true, { root: true })
+        await api.post('logout', headers)
+        window.localStorage.removeItem('token')
+        document.location.reload()
+      } catch (err) {
+        verifyAuthentication(err.response.status)
+      }
+      commit('setIsLoading', false, { root: true })
+    },
+
     async register({ commit }, formData) {
       commit('resetErrors', null, { root: true })
       try {
@@ -53,7 +65,6 @@ export default {
       try {
         commit('setIsLoading', true, { root: true })
         const { data } = await api.get('me', headers)
-        console.log(data)
         commit('setAuthenticatedUser', data)
       } catch (err) {
         verifyAuthentication(err.response.status)

@@ -29,5 +29,9 @@ export default {
 
 .logo {
   text-decoration: none;
+
+  h1 {
+    color: $white;
+  }
 }
 </style>

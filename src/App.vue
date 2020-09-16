@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar />
+    <Navbar v-if="isAuthenticated"/>
     <transition name="fader">
       <router-view/>
     </transition>
@@ -12,6 +12,13 @@ export default {
   components: {
     Navbar: () => import('@/components/nav/Navbar'),
   },
+
+  computed: {
+    isAuthenticated() {
+      return window.localStorage.getItem('token')
+    },
+  },
+
 }
 </script>
 
