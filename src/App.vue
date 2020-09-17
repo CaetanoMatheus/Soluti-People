@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar v-if="isAuthenticated"/>
     <transition name="fader">
-      <router-view/>
+      <router-view :key="$route.path" />
     </transition>
   </div>
 </template>

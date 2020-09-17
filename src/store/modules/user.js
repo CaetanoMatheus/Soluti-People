@@ -24,16 +24,30 @@ export default {
   },
 
   mutations: {
-    setUsers: (state, data) => { state.users = data },
-    setUser: (state, data) => { state.user = data },
-    setUserTelephones: (state, data) => { state.user.telephones = data },
-    setUserAddress: (state, data) => { state.user.address = data },
+    setUsers: (state, data) => {
+      state.users = data
+    },
+    setUser: (state, data) => {
+      state.user = data
+    },
+    setUserTelephones: (state, data) => {
+      state.user.telephones = data
+    },
+    setUserAddress: (state, data) => {
+      state.user.address = data
+    },
   },
 
   actions: {
-    async all({ commit }, page = 1) {
+    async all({ commit }, payload) {
       try {
-        const { data } = await api.get(`users?page=${page}`, headers)
+        const page = (payload && payload.page) || 1
+        const filterType = (payload && payload.filterType) || ''
+        const filterValue = (payload && payload.filterValue) || ''
+        const { data } = await api.get(
+          `users?page=${page}&${filterType}=${filterValue}`,
+          headers,
+        )
         commit('setUsers', data)
       } catch (err) {
         verifyAuthentication(err.response.status)
