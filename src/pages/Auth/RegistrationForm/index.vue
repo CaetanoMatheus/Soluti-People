@@ -110,8 +110,12 @@ export default {
 
   methods: {
     async register() {
-      await this.$store.dispatch('auth/register', this.form)
-      if (Object.keys(this.errors).length === 0) {
+      const result = await this.$store.dispatch('auth/register', this.form)
+      if (result) {
+        window.Swal.toast().fire({
+          icon: 'success',
+          title: 'Cadastro realizado com sucesso',
+        })
         this.$router.push({
           name: 'Login',
           params: { email: this.form.email },

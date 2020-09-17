@@ -19,10 +19,13 @@ export default {
       await api.post('logout', headers)
       window.localStorage.removeItem('token')
       document.location.reload()
+      commit('setIsLoading', false, { root: true })
+      return true
     } catch (err) {
       dispatch('verifyAuthentication', err.response.status)
+      commit('setIsLoading', false, { root: true })
+      return false
     }
-    commit('setIsLoading', false, { root: true })
   },
 
   async register({ commit }, formData) {
@@ -30,10 +33,13 @@ export default {
     try {
       commit('setIsLoading', true, { root: true })
       await api.post('register', formData)
+      commit('setIsLoading', false, { root: true })
+      return true
     } catch (err) {
       commit('setErrors', err.response.data, { root: true })
+      commit('setIsLoading', false, { root: true })
+      return false
     }
-    commit('setIsLoading', false, { root: true })
   },
 
   async authenticatedUser({ commit, dispatch }) {
@@ -41,10 +47,13 @@ export default {
       commit('setIsLoading', true, { root: true })
       const { data } = await api.get('me', headers)
       commit('setAuthenticatedUser', data)
+      commit('setIsLoading', false, { root: true })
+      return true
     } catch (err) {
       dispatch('verifyAuthentication', err.response.status)
+      commit('setIsLoading', false, { root: true })
+      return false
     }
-    commit('setIsLoading', false, { root: true })
   },
 
   verifyAuthentication(context, status) {

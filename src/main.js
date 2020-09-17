@@ -4,12 +4,14 @@ import VueTheMask from 'vue-the-mask'
 import App from '@/App'
 import router from '@/router'
 import store from '@/store'
+import Swal from '@/utils/sweetAlert'
 import '@/utils/unicons'
 
 import '@/styles/global.scss'
 
 require('@/utils/filters')
 
+window.Swal = Swal
 Vue.use(VueTheMask)
 
 Vue.config.productionTip = false

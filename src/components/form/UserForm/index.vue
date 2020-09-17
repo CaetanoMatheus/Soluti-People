@@ -211,8 +211,14 @@ export default {
       })
     },
 
-    updateUser() {
-      this.$store.dispatch('user/update', this.user)
+    async updateUser() {
+      const result = await this.$store.dispatch('user/update', this.user)
+      if (result) {
+        window.Swal.toast().fire({
+          icon: 'success',
+          title: 'Dados atualizados com sucesso.',
+        })
+      }
     },
   },
 }

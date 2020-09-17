@@ -11,10 +11,12 @@ export default {
         headers,
       )
       commit('setUsers', data)
+      return true
     } catch (err) {
       dispatch('auth/verifyAuthentication', err.response.status)
+      commit('setIsLoading', false, { root: true })
+      return false
     }
-    commit('setIsLoading', false, { root: true })
   },
 
   async one({ commit, dispatch }, id) {
@@ -22,10 +24,13 @@ export default {
       commit('setIsLoading', true, { root: true })
       const { data } = await api.get(`users/${id}`, headers)
       commit('setUser', data)
+      commit('setIsLoading', false, { root: true })
+      return true
     } catch (err) {
       dispatch('auth/verifyAuthentication', err.response.status)
+      commit('setIsLoading', false, { root: true })
+      return false
     }
-    commit('setIsLoading', false, { root: true })
   },
 
   async update({ commit }, user) {
@@ -34,10 +39,13 @@ export default {
       commit('setIsLoading', true, { root: true })
       const { data } = await api.put(`users/${user.id}`, user, headers)
       commit('setUser', data)
+      commit('setIsLoading', false, { root: true })
+      return true
     } catch (err) {
       commit('setErrors', err.response.data, { root: true })
+      commit('setIsLoading', false, { root: true })
+      return false
     }
-    commit('setIsLoading', false, { root: true })
   },
 
   removeTelephone({ state, commit }, id) {
