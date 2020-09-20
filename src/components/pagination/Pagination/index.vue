@@ -34,11 +34,11 @@ export default {
 
   methods: {
     nextPage() {
-      this.$store.dispatch('user/all', this.data.current_page + 1)
+      this.$store.dispatch('user/all', { page: this.data.current_page + 1 })
     },
 
     previousPage() {
-      this.$store.dispatch('user/all', this.data.current_page - 1)
+      this.$store.dispatch('user/all', { page: this.data.current_page - 1 })
     },
   },
 }

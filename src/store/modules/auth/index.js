@@ -7,6 +7,7 @@ export default {
 
   state: {
     authenticatedUser: {},
+    isAuthenticated: window.localStorage.getItem('token'),
   },
 
   getters,

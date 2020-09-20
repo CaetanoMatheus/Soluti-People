@@ -28,7 +28,7 @@
       label="Data de nascimento"
       icon="calendar-alt"
       type="date"
-      placeholder="Insira a sua dsata de nascimento"
+      placeholder="Insira a sua data de nascimento"
       v-model="form.date_of_birth"
     />
     <InputError

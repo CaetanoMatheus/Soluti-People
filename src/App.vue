@@ -8,15 +8,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   components: {
     Navbar: () => import('@/components/nav/Navbar'),
   },
 
   computed: {
-    isAuthenticated() {
-      return window.localStorage.getItem('token')
-    },
+    ...mapGetters({
+      isAuthenticated: 'auth/getIsAuthenticated',
+    }),
   },
 
 }
