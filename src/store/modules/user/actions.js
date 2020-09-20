@@ -33,7 +33,7 @@ export default {
     }
   },
 
-  async update({ commit }, user) {
+  async update({ commit, dispatch }, user) {
     commit('resetErrors', null, { root: true })
     try {
       commit('setIsLoading', true, { root: true })
@@ -42,6 +42,7 @@ export default {
       commit('setIsLoading', false, { root: true })
       return true
     } catch (err) {
+      dispatch('auth/verifyAuthentication', err.response.status)
       commit('setErrors', err.response.data, { root: true })
       commit('setIsLoading', false, { root: true })
       return false

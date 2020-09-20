@@ -48,13 +48,13 @@ export default {
 
   .left__arrow {
     width: 50px;
-    min-height: 50px;
+    height: 40px;
     transition: .5s;
 
     &:hover {
-      width: 80px;
+      width: 65px;
       padding: 0 15px;
-      border-radius: 50px;
+      border-radius: 20px;
       background: darken($green, 5);
     }
   }

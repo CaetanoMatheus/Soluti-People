@@ -1,71 +1,56 @@
 <hr>
-<h1 align=center>Vue.JS Template</h1>
+<h1 align=center>SOLUTI PEOPLE</h1>
 <hr>
 
-## About Vue.JS Template
-Setting up Vue.JS environment is so boring, so a made this template to spare me this repetitive work. :)
+## Sobre Soluti People
+Soluti People App é uma aplicação web desenvolvida com [Vue.JS](https://vuejs.org/).
+Esta aplicação realiza o gerenciamento dos clientes Soluti.
 
-## Packages
-- [Eslint](https://eslint.org/)
-- [Babel plugin root import](https://www.npmjs.com/package/babel-plugin-root-import)
-- [Vue Router](https://router.vuejs.org/)
-- [Vuex](https://vuex.vuejs.org/)
-- [Sass Loader](https://www.npmjs.com/package/sass-loader)
-- [Axios](https://www.npmjs.com/package/axios)
-- [Unicons](https://iconscout.com/unicons)
-- [Jest](https://jestjs.io/)
+## Front-Ent
+Esta aplicação depende de uma API que pode ser encontrada neste 
+[Repositório](https://github.com/CaetanoMatheus/Soluti-People-API).
 
+## Executando com  Docker
+Para este caso é preciso que o [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/install/) estejam previamente instalados na máquina.
 
-## Running with Docker
-#### Pre-requisites
- - [Docker](https://www.docker.com/)
- - [Docker Compose](https://docs.docker.com/compose/install/)
-
-#### Run the project
-After cloning the repository, run the command below at project's root directory. It will build the docker image, create the container and install all dependencies.
+Na pasta raiz do projeto, basta rodar o comando:
 ```sh
-docker-compose up
+docker-compose up -d
 ```
 
-By default it can be accessed at:
+Após executar este comando, a imagem será construida, e o container criado.
+Além disso, outras coisas que a aplicação precisa pra funcionar como a instalação dos pacotes do arquivo ``` package.json ``` será feita automaticamente. <br />
+Caso queira um retorno do que está sendo feito basta remover a flag ``` -d ``` do comando acima. <br />
 
+#### Acessando a Aplicação
+Por padão a aplicação pode ser acessada em:
 ```sh
 http://localhost:8080/
 ```
 
-If wanted, you can run commands inside the container.
+#### Executando comandos com NPM
+Caso desejado, é possível executar comandos [NPM](https://www.npmjs.com/) dentro do container.
 ```sh
-docker exec -it vuejs_template npm install axios
+docker exec -it soluti_people npm install axios
 ```
 
+Não é necessário que o [NPM](https://www.npmjs.com/) esteja instalado na máquina host pois esta instalação vem do container.
 
-## Running without Docker
-#### Pre-requisites
+## Executando sem Docker
+#### Requisitos
+Para executar esta aplicação em uma máquina sem o docker, será preciso que a máquina atenda ao requisitos abaixo.
+
 - [NODE.JS](https://nodejs.org/en/)
-- [NPM](https://www.npmjs.com/) or [YARN](https://yarnpkg.com/)
+- [NPM](https://www.npmjs.com/)
 
-#### Installing dependencies
-After cloning the repository, you will have to run one of the commands below at project's root directory.
+#### Baixando dependências
+Na pasta raiz do projeto, execute o comando abaixo. Este irá baixar todas as dependências do projeto.
 ```sh
 npm install
 ```
-or
-```sh
-yarn install
-```
 
-#### Run It
-To run the project, you will have to run one of the commands below at project's root directory.
-```sh
-npm serve
-```
-or
-```sh
-yarn serve
-```
-
-By default it can be accessed at:
-
+#### Acessando a Aplicação
+Por padão a aplicação pode ser acessada em:
 ```sh
 http://localhost:8080/
 ```

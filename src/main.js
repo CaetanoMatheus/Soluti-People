@@ -13,6 +13,7 @@ import '@/styles/global.scss'
 require('@/utils/filters')
 
 window.Swal = Swal
+
 Vue.use(VueTheMask)
 Vue.use(VueSmoothScroll)
 
