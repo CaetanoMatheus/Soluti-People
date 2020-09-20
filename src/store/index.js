@@ -10,21 +10,24 @@ export default new Vuex.Store({
   modules: {
     auth,
     user,
-    errors: {},
   },
 
   state: {
+    errors: {},
     isLoading: false,
+    headerData: {},
   },
 
   getters: {
     getIsLoading: ({ isLoading }) => isLoading,
     getErrors: ({ errors }) => errors,
+    getHeaderData: ({ headerData }) => headerData,
   },
 
   mutations: {
     setIsLoading: (state, value) => { state.isLoading = value },
     setErrors: (state, errors) => { state.errors = errors },
     resetErrors: (state) => { state.errors = {} },
+    setHeaderData: (state, data) => { state.headerData = data },
   },
 })

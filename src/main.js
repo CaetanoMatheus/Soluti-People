@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueTheMask from 'vue-the-mask'
+import VueSmoothScroll from 'vue2-smooth-scroll'
 
 import App from '@/App'
 import router from '@/router'
@@ -13,6 +14,7 @@ require('@/utils/filters')
 
 window.Swal = Swal
 Vue.use(VueTheMask)
+Vue.use(VueSmoothScroll)
 
 Vue.config.productionTip = false
 

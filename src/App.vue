@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <header class="header" v-if="isAuthenticated">
+    <header class="header" v-if="isAuthenticated" id="header">
       <Navbar class="header_navbar" />
-      <Title title="Editar usuário" subText="Não se esqueça de salvar as alterações." />
+      <Title :title="headerData.title" :subText="headerData.subText" />
     </header>
     <transition name="fader">
       <router-view :key="$route.path" />
@@ -22,6 +22,7 @@ export default {
   computed: {
     ...mapGetters({
       isAuthenticated: 'auth/getIsAuthenticated',
+      headerData: 'getHeaderData',
     }),
   },
 }
@@ -31,6 +32,7 @@ export default {
 .navbar {
   width: 100%;
   max-width: 1300px;
+  margin-bottom: 10px;
 }
 
 .header {

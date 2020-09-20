@@ -24,6 +24,10 @@ export default {
 
   created() {
     this.$store.dispatch('user/all')
+    this.$store.commit('setHeaderData', {
+      title: 'Lista de Usuários',
+      subText: 'Bem vindo ao Soluti People',
+    })
   },
 }
 </script>
@@ -33,7 +37,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
+  margin: 0 auto;
+  padding: 30px 30px 100px 30px;
+  max-width: 1300px;
 }
 
 .filter {

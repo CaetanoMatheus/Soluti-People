@@ -32,7 +32,6 @@
         label="Data de nascimento"
         icon="calendar-alt"
         type="date"
-        placeholder="Insira a sua dsata de nascimento"
         v-model="user.date_of_birth"
       />
       <InputError
@@ -161,8 +160,14 @@
         />
       </div>
 
-      <DoubleBounce class="form__button" v-if="isLoading" />
-      <Button class="form__button" text="Salvar dados" v-else />
+      <div class="form__bottom">
+        <DoubleBounce class="form__button" v-if="isLoading" />
+        <Button class="form__button" text="Salvar dados" v-else />
+        <span class="form__goUp" @click="scrollTo('header')">
+          Subir
+          <Unicon class="label__icon" name="top-arrow-from-top" fill="limegreen" />
+        </span>
+      </div>
     </form>
   </div>
 </template>
@@ -211,13 +216,23 @@ export default {
       })
     },
 
+    showPopUp(icon, title) {
+      window.Swal.toast().fire({ icon, title })
+    },
+
+    scrollTo(id) {
+      const element = document.getElementById(id)
+      this.$smoothScroll({ scrollTo: element })
+    },
+
     async updateUser() {
       const result = await this.$store.dispatch('user/update', this.user)
       if (result) {
-        window.Swal.toast().fire({
-          icon: 'success',
-          title: 'Dados atualizados com sucesso.',
-        })
+        this.scrollTo('header')
+        this.showPopUp('success', 'Dados atualizados com sucesso.')
+      } else {
+        this.scrollTo('editPage')
+        this.showPopUp('error', 'Falha ao atualizar dados.')
       }
     },
   },
@@ -272,6 +287,26 @@ export default {
     &:hover {
       font-size: 14px;
       text-decoration: underline;
+    }
+  }
+
+  &__bottom, &__goUp  {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+  }
+
+  &__goUp  {
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: .3s;
+
+    &:hover {
+      background: $light-grey;
+      margin-right: -10px;
+      border-radius: 20px;
+      padding: 5px 10px 5px 20px;
     }
   }
 }
