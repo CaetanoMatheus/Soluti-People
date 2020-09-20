@@ -6,7 +6,7 @@
 Soluti People App é uma aplicação web desenvolvida com [Vue.JS](https://vuejs.org/).
 Esta aplicação realiza o gerenciamento dos clientes Soluti.
 
-## Front-Ent
+## Back-End
 Esta aplicação depende de uma API que pode ser encontrada neste 
 [Repositório](https://github.com/CaetanoMatheus/Soluti-People-API).
 
