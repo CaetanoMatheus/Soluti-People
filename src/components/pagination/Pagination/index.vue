@@ -2,7 +2,8 @@
   <div class="container">
     <button
       class="item previous"
-      v-if="data.current_page > 1"
+      :class="{ 'item--disabled': data.current_page <= 1 }"
+      :disabled="data.current_page <= 1"
       @click="previousPage"
     >
       <Unicon name="angle-left" fill="limegreen" />
@@ -13,7 +14,8 @@
 
     <button
       class="item next"
-      v-if="data.current_page < data.last_page"
+      :class="{ 'item--disabled': data.current_page >= data.last_page }"
+      :disabled="data.current_page >= data.last_page"
       @click="nextPage"
     >
       Próximo
@@ -74,6 +76,14 @@ export default {
 
   &:hover {
     background: lighten($green, 20);
+  }
+
+  &--disabled {
+    background: $light-grey;
+
+    &:hover {
+      background: $light-grey;
+    }
   }
 }
 

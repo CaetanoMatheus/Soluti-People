@@ -1,7 +1,13 @@
 <template>
   <nav class="navbar">
-    <router-link class="logo" :to="{ name: 'Home' }">
-      <h1>Soluti People</h1>
+    <router-link class="left" :to="{ name: 'Home' }">
+      <h1 class="left__text" v-if="isHome">Soluti People</h1>
+      <img
+        class="left__arrow"
+        src="@/assets/svg/left-arrow.svg"
+        alt="Arrow Left"
+        v-else
+      />
     </router-link>
     <UserDropdown />
   </nav>
@@ -11,6 +17,12 @@
 export default {
   components: {
     UserDropdown: () => import('@/components/dropdown/UserDropdown'),
+  },
+
+  computed: {
+    isHome() {
+      return this.$route.name === 'Home'
+    },
   },
 
   created() {
@@ -27,11 +39,24 @@ export default {
   padding: 10px 20px;
 }
 
-.logo {
+.left {
   text-decoration: none;
 
-  h1 {
+  &__text {
     color: $white;
+  }
+
+  .left__arrow {
+    width: 50px;
+    min-height: 50px;
+    transition: .5s;
+
+    &:hover {
+      width: 80px;
+      padding: 0 15px;
+      border-radius: 50px;
+      background: darken($green, 5);
+    }
   }
 }
 </style>

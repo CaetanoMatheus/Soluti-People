@@ -1,37 +1,41 @@
 <template>
   <div class="login">
-    <img
-      class="hero"
-      src="@/assets/svg/authentication.svg"
-      alt="Authentication"
-    />
-    <div class="content">
-      <Title
-        title="Acessar"
-        subText="Acesse o Soluti People"
-        v-if="loginRoute"
+    <div class="login__content">
+      <img
+        class="hero"
+        src="@/assets/svg/authentication.svg"
+        alt="Authentication"
       />
-      <Title
-        title="Cadastrar-se"
-        subText="Cadastre-se no Soluti People"
-        v-else
-      />
+      <div class="content">
+        <Title
+          title="Acessar"
+          subText="Acesse o Soluti People"
+          v-if="loginRoute"
+        />
+        <Title
+          title="Cadastrar-se"
+          subText="Cadastre-se no Soluti People"
+          v-else
+        />
 
-      <div class="content__form">
-        <LoginForm :errors="errors" v-if="loginRoute" />
-        <RegistrationForm :errors="errors" v-else />
+        <div class="content__form">
+          <LoginForm :errors="errors" v-if="loginRoute" />
+          <RegistrationForm :errors="errors" v-else />
 
-        <span class="form__registerMessage">
-          {{
-            loginRoute ? "Ainda não possui uma conta?" : "Já possui uma conta?"
-          }}
-          <router-link :to="{ name: 'Register' }" v-if="loginRoute">
-            Cadastre-se
-          </router-link>
-          <router-link :to="{ name: 'Login' }" v-else>
-            Acesse
-          </router-link>
-        </span>
+          <span class="form__registerMessage">
+            {{
+              loginRoute
+                ? "Ainda não possui uma conta?"
+                : "Já possui uma conta?"
+            }}
+            <router-link :to="{ name: 'Register' }" v-if="loginRoute">
+              Cadastre-se
+            </router-link>
+            <router-link :to="{ name: 'Login' }" v-else>
+              Acesse
+            </router-link>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -61,18 +65,22 @@ export default {
 
 <style lang="scss">
 .login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 30px;
+  background: $green;
 
-  @media screen and (min-width: 1200px) {
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: space-around;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px;
+
+    @media screen and (min-width: 1200px) {
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: space-around;
+    }
   }
 }
 

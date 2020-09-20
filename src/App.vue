@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Navbar v-if="isAuthenticated"/>
+    <header class="header" v-if="isAuthenticated">
+      <Navbar class="header_navbar" />
+      <Title title="Editar usuário" subText="Não se esqueça de salvar as alterações." />
+    </header>
     <transition name="fader">
       <router-view :key="$route.path" />
     </transition>
@@ -13,6 +16,7 @@ import { mapGetters } from 'vuex'
 export default {
   components: {
     Navbar: () => import('@/components/nav/Navbar'),
+    Title: () => import('@/components/text/Title'),
   },
 
   computed: {
@@ -20,16 +24,30 @@ export default {
       isAuthenticated: 'auth/getIsAuthenticated',
     }),
   },
-
 }
 </script>
 
 <style lang="scss" scoped>
-.fader-enter-active, .fader-leave-active {
-  transition: .3s;
+.navbar {
+  width: 100%;
+  max-width: 1300px;
 }
 
-.fader-enter, .fader-leave-to {
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  background: $green;
+}
+
+.fader-enter-active,
+.fader-leave-active {
+  transition: 0.3s;
+}
+
+.fader-enter,
+.fader-leave-to {
   filter: blur(10px);
   opacity: 0;
 }

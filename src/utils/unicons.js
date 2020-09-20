@@ -14,6 +14,7 @@ import {
   uniTrash,
   uniPlus,
   uniAngleDown,
+  uniEnter,
 } from 'vue-unicons/src/icons'
 
 Unicon.add([
@@ -30,6 +31,7 @@ Unicon.add([
   uniTrash,
   uniPlus,
   uniAngleDown,
+  uniEnter,
 ])
 
 Vue.use(Unicon, { height: 20, width: 20 })
